@@ -10,25 +10,27 @@ Original file is located at
 #This list will store the users entered data
 inputList = []
 
-#This for loop will be used to prompt the user to enter 10 values.
-for i in range(10):
-  #The while loop will check if the case in the try statement will be true.
-  while True:
-      """ 
-      This try case will prompt an user to enter and integer and check if it as integer. 
-      The list would append it if it is an integer. It would break the loop as an integer 
-      would be entered for that specific iteration.
-      """
-      try:
-          userInput = int(input("Please enter an integer:"))
-          inputList.append(userInput)
-          break
-      
-      #The except condition will give an exception case where it will say that the value entered is not an integer
-      #and will prompt the user to enter a number once again. That is why we have the "continue" term. 
-      except:
-          print("Enter an integer please. Examples are: 1, 2, 3..")
-          continue  
+"""
+The while loop will be checking if the user has 10 integers and if an user does not enter an integer 
+then it would show an error that you must enter an integer. Entering non -integers do not count in 
+and therefore it will continue prompting you until you have entered 10 integers. 
+"""
+while len(inputList) < 10:
+    userInput = input(f"Please enter an integer - ({len(inputList)+1} out of 10):")
+
+    """
+    try case will be checking if the user has entered an input and store it in the input list
+    if the user entered value is an input. If the user has entered something other than an integer 
+    then the expect condition will take into effect and show an error message. 
+    """
+    try:
+      userInput = int(userInput)
+      inputList.append(userInput)
+  
+    except:
+      print("Enter an integer please. Examples are: 1, 2, 3..")
+
+# prints the user entered numbers into this list. 
 print("You list of numbers are:", inputList)
 
 """
@@ -36,8 +38,10 @@ This method will take the user entered list in the parameter and
 try to find the largest number in the list. 
 """
 def maxNumber(numList): 
+  
   #This variable will be used to test and find the largest number.
   max = 0
+
   #The for loop will check each element int he list and if it is
   #larger than the value in the max value then it would store that
   #value in the max variable.
@@ -109,13 +113,13 @@ list in order to get the mean or the average.
 """
 def meanList(numList):
   #variable used as a sum variable which we will use to store the sum of each element.
-  sum = 0
+  total = 0
   #We take each element in the user entered list and add it up to find the sum of all elements.
   for i in numList:
-    sum += i
+    total += i
 
   #We divide the total sum by the length or count of the the user entered list to get the mean.
-  mean = sum/len(numList)
+  mean = total/len(numList)
 
   #We output the result of the mean or the average.
   print("The mean of the data you entered is:", mean)
@@ -125,25 +129,25 @@ This method is used to retrieve the standard devation of all items in the user e
 The formula for the standard deviation is : Square root of(sum of (each elment in list - mean of list)^2 / count or length of the list)
 """
 def numStdDeviation(numList):
-  sum = 0
+  total = 0
   sumstddev = 0
   stddev = 0
   #for loop used to find the sum to retrieve the mean.
   for i in numList:
-      sum += i
+      total += i
 
   #the length of the user entered list would be divided by sum to retrieve the mean
-  mean = sum/len(numList)
+  mean = total/len(numList)
 
   #this foor loop is used to find the sum of (each element in the list and subtract it by the mean)^2
   for i in numList:
-      sumstddev += ((i - mean)**2)
+      sumstddev += (i - mean)**2
 
   """
   The standard deviation is retrieved by dividing the sumstnddevaition retrieved from last 
   for loop by the count of numList and finding the square root of that value. 
   """
-  stddev = (sumstddev/len(numList))**(1/2)
+  stddev = (sumstddev/(len(numList) - 1))**(1/2)
 
   #prints the standard devaiation value
   print("The standard deviation of the data you entered is:", round(stddev, 2))
@@ -155,27 +159,27 @@ numStdDeviation method and we retrieve the square of that.
 """
 def numVariance(numList):
 
-  sum = 0
+  total = 0
   sumstddev = 0
   stddev = 0 
   variance = 0
     
   #for loop used to find the sum to retrieve the mean.
   for i in numList:
-      sum += i
+      total += i
 
   #the mean is the retrieved sum of the elements in the list divided by the length or count of the elements in the list.
-  mean = sum/len(numList)
+  mean = total/len(numList)
 
   #this foor loop is used to find the sum of (each element in the list and subtract it by the mean)^2
   for i in numList:
-      sumstddev += ((i - mean)**2)
+      sumstddev += (i - mean)**2
 
   """
   The standard deviation is retrieved by dividing the sumstnddevaition retrieved from last 
   for loop by the count of numList and finding the square root of that value. 
   """ 
-  stddev = (sumstddev/len(numList))**(1/2)
+  stddev = (sumstddev/(len(numList) - 1))**(1/2)
 
   #The variance will be retrieved by calculating the square of the standard deviation or to the power of 2.
   variance = stddev**2
@@ -183,6 +187,7 @@ def numVariance(numList):
   #We print the variance and round it to the closes two decimal places.
   print("The variance of the data you entered is:", round(variance, 2))
 
+print("Your entered list is: ", inputList , "\n")
 #Calls the maxNumber method to see the maximum values entered by the user.
 maxNumber(inputList)
 #Calls the minNumber method to see the minimum values entered by the user.
