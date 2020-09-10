@@ -1,1 +1,1 @@
-This is the code for the third homework.
+##This is the folder for the Assignment #3.
